@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_background"
+    android:keepScreenOn="true"
+    tools:context=".MainActivity">
+
+    <!-- Top App Bar / Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/primary_color"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_app_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="GamerConnect Hub"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_global_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="● OFFLINE"
+            android:textColor="#FFDDDD"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/tab_unselected_bg"/>
+    </LinearLayout>
+
+    <!-- Custom Navigation Tabs -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:background="@color/white"
+        android:elevation="4dp">
+
+        <Button
+            android:id="@+id/btn_tab_server"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginRight="4dp"
+            android:text="Host Server"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:background="@drawable/tab_selected_bg" />
+
+        <Button
+            android:id="@+id/btn_tab_client"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginRight="4dp"
+            android:text="Join Server"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:textColor="@color/text_primary"
+            android:background="@drawable/tab_unselected_bg" />
+
+        <Button
+            android:id="@+id/btn_tab_tools"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="Net Tools"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:textColor="@color/text_primary"
+            android:background="@drawable/tab_unselected_bg" />
+    </LinearLayout>
+
+    <!-- Main Content Area with View Toggling -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <!-- ================= SERVER HOST VIEW ================= -->
+        <ScrollView
+            android:id="@+id/layout_server"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Server Control Panel Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Host a Multiplayer Lobby"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Server Port: "
+                            android:textColor="@color/text_secondary" />
+
+                        <EditText
+                            android:id="@+id/et_server_port"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:text="8888"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tv_server_ip_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Local IP: Calculating..."
+                            android:textColor="@color/primary_color"
+                            android:textStyle="bold"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_start_server"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginRight="6dp"
+                            android:text="START SERVER"
+                            android:backgroundTint="@color/accent_color"
+                            android:textColor="@color/white" />
+
+                        <Button
+                            android:id="@+id/btn_stop_server"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="STOP"
+                            android:backgroundTint="@color/red_alert"
+                            android:textColor="@color/white"
+                            android:enabled="false" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Console Output Log (Terminal Style) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/terminal_bg"
+                    android:padding="8dp"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SERVER CONSOLE"
+                        android:textColor="@color/primary_color"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <ScrollView
+                        android:id="@+id/scroll_server_console"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:fillViewport="true">
+
+                        <TextView
+                            android:id="@+id/tv_server_console"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Server is offline. Tap START above to begin."
+                            android:textColor="@color/terminal_green"
+                            android:fontFamily="monospace"
+                            android:textSize="12sp" />
+                    </ScrollView>
+                </LinearLayout>
+
+                <!-- Server Management Operations -->
+                <LinearLayout
+                    android:id="@+id/card_server_actions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Server Broadcast Console"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <EditText
+                            android:id="@+id/et_broadcast_msg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Type message to all players..."
+                            android:textSize="13sp" />
+
+                        <Button
+                            android:id="@+id/btn_send_broadcast"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Send"
+                            android:backgroundTint="@color/primary_color"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Built-in Game Host"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="6dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Run a lightweight multiplayer Trivia Match for all connected client devices!"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        android:layout_marginBottom="8dp"/>
+
+                    <Button
+                        android:id="@+id/btn_host_trivia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="LAUNCH MULTIPLAYER TRIVIA"
+                        android:backgroundTint="@color/accent_color"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- ================= JOIN CLIENT VIEW ================= -->
+        <ScrollView
+            android:id="@+id/layout_client"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Connect Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Connect to Local Server"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <EditText
+                        android:id="@+id/et_client_ip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Server IP Address (e.g. 192.168.1.15)"
+                        android:inputType="text"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="6dp">
+
+                        <EditText
+                            android:id="@+id/et_client_port"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Port"
+                            android:inputType="number"
+                            android:text="8888"
+                            android:textSize="13sp" />
+
+                        <EditText
+                            android:id="@+id/et_client_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Your Nickname"
+                            android:inputType="text"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp">
+
+                        <Button
+                            android:id="@+id/btn_connect_server"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginRight="6dp"
+                            android:text="CONNECT"
+                            android:backgroundTint="@color/primary_color"
+                            android:textColor="@color/white" />
+
+                        <Button
+                            android:id="@+id/btn_disconnect_server"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="LEAVE"
+                            android:backgroundTint="@color/red_alert"
+                            android:textColor="@color/white"
+                            android:enabled="false" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Client Quiz Panel (Appears when Host triggers a game) -->
+                <LinearLayout
+                    android:id="@+id/layout_trivia_pane"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:backgroundTint="@color/accent_light"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_trivia_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎮 GAME IN PROGRESS!"
+                        android:textColor="@color/accent_color"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/tv_trivia_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Wait for server to send a question..."
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btn_opt_a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Option A"
+                            android:backgroundTint="@color/white"
+                            android:textColor="@color/text_primary"
+                            android:textAllCaps="false"
+                            android:layout_marginBottom="6dp" />
+
+                        <Button
+                            android:id="@+id/btn_opt_b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Option B"
+                            android:backgroundTint="@color/white"
+                            android:textColor="@color/text_primary"
+                            android:textAllCaps="false"
+                            android:layout_marginBottom="6dp" />
+
+                        <Button
+                            android:id="@+id/btn_opt_c"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Option C"
+                            android:backgroundTint="@color/white"
+                            android:textColor="@color/text_primary"
+                            android:textAllCaps="false"
+                            android:layout_marginBottom="6dp" />
+
+                        <Button
+                            android:id="@+id/btn_opt_d"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Option D"
+                            android:backgroundTint="@color/white"
+                            android:textColor="@color/text_primary"
+                            android:textAllCaps="false" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Chat Lobby Terminal -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/terminal_bg"
+                    android:padding="8dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MULTIPLAYER LOBBY CHAT"
+                        android:textColor="@color/primary_color"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp"/>
+
+                    <ScrollView
+                        android:id="@+id/scroll_client_chat"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:fillViewport="true">
+
+                        <TextView
+                            android:id="@+id/tv_client_chat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Not connected to a lobby."
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </ScrollView>
+
+                    <LinearLayout
+                        android:id="@+id/layout_client_chat_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:visibility="gone"
+                        android:layout_marginTop="6dp">
+
+                        <EditText
+                            android:id="@+id/et_client_chat_msg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Type lobby message..."
+                            android:textSize="13sp"
+                            android:textColor="@color/white"
+                            android:hintTextColor="#777777" />
+
+                        <Button
+                            android:id="@+id/btn_send_chat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:text="Send"
+                            android:textSize="11sp"
+                            android:backgroundTint="@color/primary_color"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- ================= UTILITY TOOLS VIEW ================= -->
+        <ScrollView
+            android:id="@+id/layout_tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Network Diagnostics Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📶 Connection &amp; Diagnostics"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_tools_network_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reading WiFi Status..."
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <EditText
+                            android:id="@+id/et_ping_ip"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="IP to Ping (e.g. 8.8.8.8)"
+                            android:inputType="text"
+                            android:textSize="13sp" />
+
+                        <Button
+                            android:id="@+id/btn_ping_test"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ping Test"
+                            android:backgroundTint="@color/primary_color"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_ping_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/accent_color"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="6dp" />
+                </LinearLayout>
+
+                <!-- Port Scanner Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="16dp"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔍 Local Game Port Scanner"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Checks if active game servers (Minecraft, Terraria, etc.) are running on a specific local IP address."
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <EditText
+                            android:id="@+id/et_scan_target_ip"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Target PC/Device IP"
+                            android:inputType="text"
+                            android:textSize="13sp" />
+
+                        <Button
+                            android:id="@+id/btn_start_scan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Scan Ports"
+                            android:backgroundTint="@color/accent_color"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_scan_results"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Enter target IP and press Scan."
+                        android:textColor="@color/text_secondary"
+                        android:fontFamily="monospace"
+                        android:textSize="11sp"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+                <!-- Wake-on-LAN (WOL) Card -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_bg"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚡ Wake-on-LAN (WOL)"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Turn on your gaming PC remotely by sending a network magic packet to its MAC address."
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        android:layout_marginBottom="12dp" />
+
+                    <EditText
+                        android:id="@+id/et_wol_mac"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="PC MAC Address (e.g. 00:11:22:33:44:55)"
+                        android:inputType="text"
+                        android:textSize="13sp" />
+
+                    <Button
+                        android:id="@+id/btn_send_wol"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SEND WAKE PACKET"
+                        android:backgroundTint="@color/primary_color"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_wol_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/accent_color"
+                        android:textSize="12sp"
+                        android:layout_marginTop="6dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+</LinearLayout>
